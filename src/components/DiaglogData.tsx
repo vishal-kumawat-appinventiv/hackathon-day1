@@ -40,8 +40,6 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
 
   const handleAddBudgetBtn = () => {
     const newId = uuidv4();
-    const existingBudgets = localStorage.getItem("budgets");
-    const budgetsArray = existingBudgets ? JSON.parse(existingBudgets) : [];
 
     const data = {
       category,
@@ -53,16 +51,8 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
 
     if (title === "Income") {
       dispatch(addBudget({ ...data, type: "Income" }));
-      localStorage.setItem(
-        "budgets",
-        JSON.stringify([...budgetsArray, { ...data, type: "Income" }])
-      );
     } else if (title === "Expense") {
       dispatch(addBudget({ ...data, type: "Expense" }));
-      localStorage.setItem(
-        "budgets",
-        JSON.stringify([...budgetsArray, { ...data, type: "Expense" }])
-      );
     }
     toast({
       title: title + " added successfully!",

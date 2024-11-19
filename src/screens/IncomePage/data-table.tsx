@@ -56,14 +56,6 @@ export function DataTable<TData, TValue>({
 
   const handleDeleteAllIncomeData = () => {
     dispatch(clearIncome());
-    const prevIncome = localStorage.getItem("budgets");
-    if (prevIncome) {
-      const prevIncomeArray = JSON.parse(prevIncome);
-      const filteredIncomeArray = prevIncomeArray.filter(
-        (budget: any) => budget.type !== "Income"
-      );
-      localStorage.setItem("budgets", JSON.stringify(filteredIncomeArray));
-    }
   };
 
   return (

@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { clearExpense, clearIncome } from "@/redux/slices/budgetSlice";
+import { clearExpense } from "@/redux/slices/budgetSlice";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,14 +56,6 @@ export function DataTable<TData, TValue>({
 
   const handleDeleteAllExpenseData = () => {
     dispatch(clearExpense());
-    const prevExpense = localStorage.getItem("budgets");
-    if (prevExpense) {
-      const prevExpenseArray = JSON.parse(prevExpense);
-      const filteredExpenseArray = prevExpenseArray.filter(
-        (budget: any) => budget.type !== "Expense"
-      );
-      localStorage.setItem("budgets", JSON.stringify(filteredExpenseArray));
-    }
   };
 
   return (
