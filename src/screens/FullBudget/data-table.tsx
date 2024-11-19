@@ -24,6 +24,8 @@ import { useState } from "react";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { clearBudget } from "@/redux/slices/budgetSlice";
+import { CSVLink } from "react-csv";
+import { Budget } from "@/lib/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -96,6 +98,13 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center">
           <Button variant="destructive" onClick={handleDelete}>
             Delete all Budget
+          </Button>
+        </div>
+        <div className="flex items-center">
+          <Button asChild>
+            <CSVLink data={data as Budget[]} filename="data.csv">
+              Export to CSV
+            </CSVLink>
           </Button>
         </div>
       </div>
