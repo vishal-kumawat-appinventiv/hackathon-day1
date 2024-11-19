@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { clearExpense } from "@/redux/slices/budgetSlice";
+import { clearIncome } from "@/redux/slices/budgetSlice";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
   const dispatch: AppDispatch = useDispatch();
 
   const handleDeleteAllExpenseData = () => {
-    dispatch(clearExpense());
+    dispatch(clearIncome());
   };
 
   return (
@@ -85,7 +85,7 @@ export function DataTable<TData, TValue>({
         </div>
         <div className="flex items-center">
           <Button variant="destructive" onClick={handleDeleteAllExpenseData}>
-            Delete All Expenses
+            Delete All Expense
           </Button>
         </div>
       </div>

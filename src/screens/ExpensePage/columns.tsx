@@ -12,6 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { deleteBudget } from "@/redux/slices/budgetSlice";
+import { useToast } from "@/hooks/use-toast";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import DiaglogData from "@/components/DiaglogData";
 
 export const columns: ColumnDef<Budget>[] = [
   {
@@ -88,6 +94,15 @@ export const columns: ColumnDef<Budget>[] = [
     id: "actions",
     cell: ({ row }) => {
       const expenseRow = row.original;
+      const dispatch: AppDispatch = useDispatch();
+      const { toast } = useToast();
+
+      const handleDelete = (id: string) => {
+        dispatch(deleteBudget(id));
+        toast({
+          title: "Expense deleted successfully!",
+        });
+      };
 
       return (
         <DropdownMenu>
@@ -105,8 +120,17 @@ export const columns: ColumnDef<Budget>[] = [
               Copy Expense ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit Expense</DropdownMenuItem>
-            <DropdownMenuItem>Delete Expense</DropdownMenuItem>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="cursor-pointer hover:bg-gray-800 p-1 ml-1 rounded">
+                  Edit Expense
+                </div>
+              </DialogTrigger>
+              <DiaglogData title="Expense" edit={expenseRow} />
+            </Dialog>
+            <DropdownMenuItem onClick={() => handleDelete(expenseRow.id)}>
+              Delete Expense
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
