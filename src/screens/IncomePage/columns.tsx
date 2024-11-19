@@ -12,6 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { deleteBudget } from "@/redux/slices/budgetSlice";
+import { useToast } from "@/hooks/use-toast";
 
 export const columns: ColumnDef<Budget>[] = [
   {
@@ -88,6 +92,15 @@ export const columns: ColumnDef<Budget>[] = [
     id: "actions",
     cell: ({ row }) => {
       const incomeRow = row.original;
+      const dispatch: AppDispatch = useDispatch();
+      const { toast } = useToast();
+
+      const handleDelete = (id: string) => {
+        dispatch(deleteBudget(id));
+        toast({
+          title: "Income deleted successfully!",
+        });
+      };
 
       return (
         <DropdownMenu>
@@ -106,7 +119,9 @@ export const columns: ColumnDef<Budget>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Edit Income</DropdownMenuItem>
-            <DropdownMenuItem>Delete Income</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleDelete(incomeRow.id)}>
+              Delete Income
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
