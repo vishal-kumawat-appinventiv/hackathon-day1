@@ -103,7 +103,7 @@ const HomePage = () => {
         </Card>
         <Card
           className="py-5 hover:cursor-pointer"
-          onClick={() => navigate("/full-budget")}
+          onClick={() => navigate("/full-budget-details")}
         >
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
