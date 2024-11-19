@@ -18,7 +18,6 @@ import { deleteBudget } from "@/redux/slices/budgetSlice";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import DiaglogData from "@/components/DiaglogData";
-import { useState } from "react";
 
 export const columns: ColumnDef<Budget>[] = [
   {
