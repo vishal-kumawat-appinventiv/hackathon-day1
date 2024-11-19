@@ -39,6 +39,9 @@ const budgetSlice = createSlice({
     clearIncome: (state) => {
       state.data = state.data.filter((budget) => budget.type !== "Income");
     },
+    clearExpense: (state) => {
+      state.data = state.data.filter((budget) => budget.type !== "Expense");
+    },
     clearBudget: (state) => {
       state.data = [];
     },
@@ -53,6 +56,7 @@ export const {
   updateBudget,
   clearBudget,
   clearIncome,
+  clearExpense,
 } = budgetSlice.actions;
 
 export const getIncomeData = createSelector(
