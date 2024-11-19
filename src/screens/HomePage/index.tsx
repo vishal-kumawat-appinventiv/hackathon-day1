@@ -30,6 +30,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 
 const HomePage = () => {
+  //@ts-ignore
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
