@@ -42,7 +42,7 @@ const Insights = () => {
   );
 
   return (
-    <div className="mx-auto p-4">
+    <div className="mx-auto mt-5">
       <h1 className="text-2xl font-bold mb-6">Detailed Insights</h1>
       <Tabs defaultValue="day" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
