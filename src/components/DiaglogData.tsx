@@ -22,14 +22,16 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { addBudget } from "@/redux/slices/budgetSlice";
+import { addBudget, updateBudget } from "@/redux/slices/budgetSlice";
 import { useToast } from "@/hooks/use-toast";
+import { Budget } from "@/lib/types";
 
 interface Props {
   title: "Income" | "Expense";
+  edit: Budget;
 }
 
-const DiaglogData: React.FC<Props> = ({ title }) => {
+const DiaglogData: React.FC<Props> = ({ title, edit }) => {
   const dispatch: AppDispatch = useDispatch();
   const { toast } = useToast();
 
@@ -59,10 +61,29 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
     });
   };
 
+  const handleEditBudgetBtn = () => {
+    const data = {
+      category,
+      amount,
+      date: date.toString(),
+      note,
+      id: edit?.id,
+      type: edit?.type,
+    };
+
+    dispatch(updateBudget(data));
+
+    toast({
+      title: title + " Edited successfully!",
+    });
+  };
+
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle className="text-2xl">Add {title}</DialogTitle>
+        <DialogTitle className="text-2xl">
+          {edit ? "Edit" : "Add"} {title}
+        </DialogTitle>
         <DialogDescription>Enter your {title} details.</DialogDescription>
       </DialogHeader>
       <div className="grid gap-2 md:gap-4 py-2 md:py-4">
@@ -125,8 +146,11 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
       </div>
       <DialogFooter>
         <DialogClose asChild>
-          <Button type="submit" onClick={handleAddBudgetBtn}>
-            Add {title}
+          <Button
+            type="submit"
+            onClick={edit ? handleEditBudgetBtn : handleAddBudgetBtn}
+          >
+            {edit ? "Update" : "Add"} {title}
           </Button>
         </DialogClose>
       </DialogFooter>

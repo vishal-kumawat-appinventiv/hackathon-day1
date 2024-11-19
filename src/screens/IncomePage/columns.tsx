@@ -16,6 +16,9 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { deleteBudget } from "@/redux/slices/budgetSlice";
 import { useToast } from "@/hooks/use-toast";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import DiaglogData from "@/components/DiaglogData";
+import { useState } from "react";
 
 export const columns: ColumnDef<Budget>[] = [
   {
@@ -118,7 +121,14 @@ export const columns: ColumnDef<Budget>[] = [
               Copy income ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit Income</DropdownMenuItem>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="cursor-pointer hover:bg-gray-800 p-1 ml-1 rounded">
+                  Edit Income
+                </div>
+              </DialogTrigger>
+              <DiaglogData title="Income" edit={incomeRow} />
+            </Dialog>
             <DropdownMenuItem onClick={() => handleDelete(incomeRow.id)}>
               Delete Income
             </DropdownMenuItem>
