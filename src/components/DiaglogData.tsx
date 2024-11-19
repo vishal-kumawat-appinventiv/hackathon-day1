@@ -28,7 +28,7 @@ import { Budget } from "@/lib/types";
 
 interface Props {
   title: "Income" | "Expense";
-  edit: Budget;
+  edit?: Budget;
 }
 
 const DiaglogData: React.FC<Props> = ({ title, edit }) => {
@@ -71,7 +71,7 @@ const DiaglogData: React.FC<Props> = ({ title, edit }) => {
       type: edit?.type,
     };
 
-    dispatch(updateBudget(data));
+    dispatch(updateBudget(data as Budget));
 
     toast({
       title: title + " Edited successfully!",
