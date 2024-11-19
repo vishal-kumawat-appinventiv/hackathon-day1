@@ -10,6 +10,7 @@ import { getTotalExpense, getTotalIncome } from "@/redux/slices/budgetSlice";
 import { FilePenLine, SquarePlus } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Insights from "@/components/Insights";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ const HomePage = () => {
           </CardHeader>
         </Card>
       </div>
+      <Insights />
     </div>
   );
 };

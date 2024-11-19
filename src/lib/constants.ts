@@ -42,3 +42,8 @@ export const EXPENSE_CATEGORIES: string[] = [
   "Entertainment",
   "Other",
 ];
+
+export const COLORS = {
+  Income: "hsl(var(--chart-1))",
+  Expense: "hsl(var(--chart-2))",
+};

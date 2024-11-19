@@ -14,7 +14,7 @@ const App = () => {
   }, [budgetData]);
 
   return (
-    <div className="dark:bg-black min-h-screen">
+    <div className="dark:bg-black min-h-screen overflow-hidden">
       <BrowserRouter>
         <Navbar />
         <Routes>

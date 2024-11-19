@@ -6,3 +6,5 @@ export interface Budget {
   date: string;
   note: string;
 }
+
+export type TimeFrame = "day" | "week" | "month";
