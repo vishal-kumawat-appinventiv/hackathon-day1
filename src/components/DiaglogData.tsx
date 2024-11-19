@@ -60,6 +60,21 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
         })
       );
     }
+    const existingBudgets = localStorage.getItem("budgets");
+    const budgetsArray = existingBudgets ? JSON.parse(existingBudgets) : [];
+    const updatedBudgets = [
+      ...budgetsArray,
+      {
+        category,
+        amount,
+        date: date.toString(),
+        note,
+        type: "Expense",
+        id: newId.toString(),
+      },
+    ];
+    localStorage.setItem("budgets", JSON.stringify(updatedBudgets));
+    console.log("done")
   };
 
   return (
