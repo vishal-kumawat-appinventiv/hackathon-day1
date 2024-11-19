@@ -13,14 +13,13 @@ const budgetSlice = createSlice({
   name: "budget",
   initialState,
   reducers: {
-    addIncome: (state, action: PayloadAction<Budget>) => {
-      state.data.push(action.payload);
-    },
-    addExpense: (state, action: PayloadAction<Budget>) => {
+    addBudget: (state, action: PayloadAction<Budget>) => {
       state.data.push(action.payload);
     },
     deleteBudget: (state, action: PayloadAction<number>) => {
-      state.data = state.data.filter((budget) => budget.id !== action.payload);
+      state.data = state.data.filter(
+        (budget) => budget.id !== action.payload.toString()
+      );
     },
     updateBudget: (state, action: PayloadAction<Budget>) => {
       const index = state.data.findIndex(
@@ -37,3 +36,10 @@ const budgetSlice = createSlice({
 });
 
 export default budgetSlice.reducer;
+
+export const {
+  addBudget,
+  deleteBudget,
+  updateBudget,
+  clearBudget,
+} = budgetSlice.actions;

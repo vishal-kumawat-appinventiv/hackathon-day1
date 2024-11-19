@@ -1,8 +1,8 @@
 export interface Budget {
-  id: number;
+  id: string;
   type: "Income" | "Expense";
   category: string;
   amount: number;
-  date: Date;
+  date: string;
   note: string;
 }

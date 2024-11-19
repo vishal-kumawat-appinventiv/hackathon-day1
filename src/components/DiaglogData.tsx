@@ -18,16 +18,49 @@ import {
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "@/lib/constants";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { addBudget } from "@/redux/slices/budgetSlice";
 
 interface Props {
   title: "Income" | "Expense";
 }
 
 const DiaglogData: React.FC<Props> = ({ title }) => {
+  const dispatch: AppDispatch = useDispatch();
+
   const [category, setCategory] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date>(new Date());
   const [note, setNote] = useState<string>("");
+
+  const handleAddBudgetBtn = () => {
+    const newId = uuidv4();
+    if (title === "Income") {
+      dispatch(
+        addBudget({
+          category,
+          amount,
+          date: date.toString(),
+          note,
+          type: "Income",
+          id: newId.toString(),
+        })
+      );
+    } else if (title === "Expense") {
+      dispatch(
+        addBudget({
+          category,
+          amount,
+          date: date.toString(),
+          note,
+          type: "Expense",
+          id: newId.toString(),
+        })
+      );
+    }
+  };
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -77,7 +110,7 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={setDate as any}
             className="rounded-md border col-span-3"
           />
         </div>
@@ -94,7 +127,9 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
         </div>
       </div>
       <DialogFooter>
-        <Button type="submit">Add {title}</Button>
+        <Button type="submit" onClick={handleAddBudgetBtn}>
+          Add {title}
+        </Button>
       </DialogFooter>
     </DialogContent>
   );
