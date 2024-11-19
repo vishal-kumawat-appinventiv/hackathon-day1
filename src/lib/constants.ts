@@ -11,3 +11,19 @@ export const ROUTES = [
     component: ExpensePage,
   },
 ];
+
+export const INCOME_CATEGORIES: string[] = [
+  "Salary",
+  "Investment",
+  "Part-Time",
+  "Bonus",
+  "Other",
+];
+
+export const EXPENSE_CATEGORIES: string[] = [
+  "Food",
+  "Transport",
+  "Shopping",
+  "Entertainment",
+  "Other",
+];
