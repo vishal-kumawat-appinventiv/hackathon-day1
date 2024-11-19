@@ -37,44 +37,30 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
 
   const handleAddBudgetBtn = () => {
     const newId = uuidv4();
-    if (title === "Income") {
-      dispatch(
-        addBudget({
-          category,
-          amount,
-          date: date.toString(),
-          note,
-          type: "Income",
-          id: newId.toString(),
-        })
-      );
-    } else if (title === "Expense") {
-      dispatch(
-        addBudget({
-          category,
-          amount,
-          date: date.toString(),
-          note,
-          type: "Expense",
-          id: newId.toString(),
-        })
-      );
-    }
     const existingBudgets = localStorage.getItem("budgets");
     const budgetsArray = existingBudgets ? JSON.parse(existingBudgets) : [];
-    const updatedBudgets = [
-      ...budgetsArray,
-      {
-        category,
-        amount,
-        date: date.toString(),
-        note,
-        type: "Expense",
-        id: newId.toString(),
-      },
-    ];
-    localStorage.setItem("budgets", JSON.stringify(updatedBudgets));
-    console.log("done")
+
+    const data = {
+      category,
+      amount,
+      date: date.toString(),
+      note,
+      id: newId.toString(),
+    };
+
+    if (title === "Income") {
+      dispatch(addBudget({ ...data, type: "Income" }));
+      localStorage.setItem(
+        "budgets",
+        JSON.stringify([...budgetsArray, { ...data, type: "Income" }])
+      );
+    } else if (title === "Expense") {
+      dispatch(addBudget({ ...data, type: "Expense" }));
+      localStorage.setItem(
+        "budgets",
+        JSON.stringify([...budgetsArray, { ...data, type: "Expense" }])
+      );
+    }
   };
 
   return (
