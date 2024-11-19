@@ -6,6 +6,9 @@ const Navbar = () => {
       <div>
         <h1 className="text-2xl">Expense Tracker</h1>
       </div>
+      <div className="hidden md:block pr-14">
+        <p>Made by Vishal Kumawat for Appinventiv Hackathon</p>
+      </div>
       <div>
         <ModeToggle />
       </div>
