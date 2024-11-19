@@ -1,4 +1,5 @@
 import {
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -128,9 +129,11 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
         </div>
       </div>
       <DialogFooter>
-        <Button type="submit" onClick={handleAddBudgetBtn}>
-          Add {title}
-        </Button>
+        <DialogClose asChild>
+          <Button type="submit" onClick={handleAddBudgetBtn}>
+            Add {title}
+          </Button>
+        </DialogClose>
       </DialogFooter>
     </DialogContent>
   );
