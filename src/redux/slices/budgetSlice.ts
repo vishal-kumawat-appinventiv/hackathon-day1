@@ -73,3 +73,19 @@ export const getBudgetData = createSelector(
   (state: RootState) => state.budget.data,
   (budgetData) => budgetData
 );
+
+export const getTotalIncome = createSelector(
+  (state: RootState) => state.budget.data,
+  (budgetData) =>
+    budgetData
+      .filter((budget) => budget.type === "Income")
+      .reduce((total, budget) => total + budget.amount, 0)
+);
+
+export const getTotalExpense = createSelector(
+  (state: RootState) => state.budget.data,
+  (budgetData) =>
+    budgetData
+      .filter((budget) => budget.type === "Expense")
+      .reduce((total, budget) => total + budget.amount, 0)
+);

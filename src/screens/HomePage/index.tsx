@@ -6,11 +6,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { getTotalExpense, getTotalIncome } from "@/redux/slices/budgetSlice";
 import { FilePenLine, SquarePlus } from "lucide-react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  const totalIncome = useSelector(getTotalIncome);
+  const totalExpense = useSelector(getTotalExpense);
+  const netProfit = totalIncome - totalExpense;
 
   return (
     <div className="max-w-4xl mx-auto mt-5 md:mt-16 p-4">
@@ -21,7 +27,7 @@ const HomePage = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between w-full">
                 <h2>Net Profit</h2>
-                <h1>₹ 12,000</h1>
+                <h1>₹ {netProfit > 0 ? netProfit : 0}</h1>
               </CardTitle>
               <CardDescription>Total Expense - Total Income</CardDescription>
             </CardHeader>
@@ -32,7 +38,7 @@ const HomePage = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between w-full">
                 <h2>Total Income</h2>
-                <h1>₹ 18,000</h1>
+                <h1>₹ {totalIncome}</h1>
               </CardTitle>
             </CardHeader>
           </Card>
@@ -40,7 +46,7 @@ const HomePage = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between w-full">
                 <h2>Total Expense</h2>
-                <h1>₹ 6000</h1>
+                <h1>₹ {totalExpense}</h1>
               </CardTitle>
             </CardHeader>
           </Card>
