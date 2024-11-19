@@ -24,8 +24,12 @@ interface Props {
 }
 
 const DiaglogData: React.FC<Props> = ({ title }) => {
-  //@ts-ignore
+  const [category, setCategory] = useState<string>("");
+  const [amount, setAmount] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [note, setNote] = useState<string>("");
+
+  console.log(category, amount, date, note);
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -38,15 +42,9 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
           <Label htmlFor="category" className="text-right">
             Category
           </Label>
-          <Select>
+          <Select onValueChange={(e) => setCategory(e)}>
             <SelectTrigger className="col-span-3">
-              <SelectValue
-                placeholder={
-                  title === "Income"
-                    ? INCOME_CATEGORIES[0]
-                    : EXPENSE_CATEGORIES[0]
-                }
-              />
+              <SelectValue placeholder={"Select a category"} />
             </SelectTrigger>
             <SelectContent>
               {(title === "Income"
@@ -54,7 +52,7 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
                 : EXPENSE_CATEGORIES
               ).map((c) => {
                 return (
-                  <SelectItem value="light" key={c}>
+                  <SelectItem value={c} key={c}>
                     {c}
                   </SelectItem>
                 );
@@ -68,9 +66,9 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
           </Label>
           <Input
             id="amount"
-            defaultValue="12000"
             className="col-span-3"
             type="number"
+            onChange={(e) => setAmount(Number(e.target.value))}
           />
         </div>
         <div className="flex flex-col md:grid grid-cols-4 items-center gap-4">
@@ -88,7 +86,11 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
           <Label htmlFor="note" className="text-right">
             Note
           </Label>
-          <Input id="note" defaultValue="Appinventiv" className="col-span-3" />
+          <Input
+            id="note"
+            className="col-span-3"
+            onChange={(e) => setNote(e.target.value)}
+          />
         </div>
       </div>
       <DialogFooter>
