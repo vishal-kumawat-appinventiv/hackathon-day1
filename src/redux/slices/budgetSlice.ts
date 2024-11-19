@@ -5,8 +5,13 @@ interface BudgetState {
   data: Budget[];
 }
 
+const getInitialBudgets = () => {
+  const existingBudgets = localStorage.getItem("budgets");
+  return existingBudgets ? JSON.parse(existingBudgets) : [];
+};
+
 const initialState: BudgetState = {
-  data: [],
+  data: getInitialBudgets(),
 };
 
 const budgetSlice = createSlice({
@@ -37,9 +42,5 @@ const budgetSlice = createSlice({
 
 export default budgetSlice.reducer;
 
-export const {
-  addBudget,
-  deleteBudget,
-  updateBudget,
-  clearBudget,
-} = budgetSlice.actions;
+export const { addBudget, deleteBudget, updateBudget, clearBudget } =
+  budgetSlice.actions;
