@@ -23,6 +23,7 @@ import { v4 as uuidv4 } from "uuid";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { addBudget } from "@/redux/slices/budgetSlice";
+import { useToast } from "@/hooks/use-toast";
 
 interface Props {
   title: "Income" | "Expense";
@@ -30,6 +31,7 @@ interface Props {
 
 const DiaglogData: React.FC<Props> = ({ title }) => {
   const dispatch: AppDispatch = useDispatch();
+  const { toast } = useToast();
 
   const [category, setCategory] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
@@ -62,6 +64,9 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
         JSON.stringify([...budgetsArray, { ...data, type: "Expense" }])
       );
     }
+    toast({
+      title: title + " added successfully!",
+    });
   };
 
   return (

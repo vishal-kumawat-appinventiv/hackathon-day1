@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./lib/constants";
 import Navbar from "./components/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             />
           ))}
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </div>
   );
