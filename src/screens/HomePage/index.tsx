@@ -13,7 +13,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-3xl mx-auto mt-5 md:mt-16 p-4">
+    <div className="max-w-4xl mx-auto mt-5 md:mt-16 p-4">
       {/* TopBar */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -76,8 +76,9 @@ const HomePage = () => {
           <DiaglogData title="Expense" />
         </Dialog>
       </div>
+
       {/* Manage Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
         <Card
           className="py-5 hover:cursor-pointer"
           onClick={() => navigate("/income")}
@@ -98,6 +99,17 @@ const HomePage = () => {
               Manage Expense <FilePenLine size={30} />
             </CardTitle>
             <CardDescription>Manage the expense details.</CardDescription>
+          </CardHeader>
+        </Card>
+        <Card
+          className="py-5 hover:cursor-pointer"
+          onClick={() => navigate("/full-budget")}
+        >
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between w-full">
+              Manage Budget <FilePenLine size={30} />
+            </CardTitle>
+            <CardDescription>Manage the full budget details.</CardDescription>
           </CardHeader>
         </Card>
       </div>
