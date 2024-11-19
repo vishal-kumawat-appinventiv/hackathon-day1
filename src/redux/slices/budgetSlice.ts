@@ -1,5 +1,7 @@
 import { Budget } from "@/lib/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { RootState } from "../store";
 
 interface BudgetState {
   data: Budget[];
@@ -44,3 +46,18 @@ export default budgetSlice.reducer;
 
 export const { addBudget, deleteBudget, updateBudget, clearBudget } =
   budgetSlice.actions;
+
+export const getIncomeData = createSelector(
+  (state: RootState) => state.budget.data,
+  (budgetData) => budgetData.filter((budget) => budget.type === "Income")
+);
+
+export const getExpenseData = createSelector(
+  (state: RootState) => state.budget.data,
+  (budgetData) => budgetData.filter((budget) => budget.type === "Expense")
+);
+
+export const getBudgetData = createSelector(
+  (state: RootState) => state.budget.data,
+  (budgetData) => budgetData
+);
