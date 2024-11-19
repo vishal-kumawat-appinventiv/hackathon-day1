@@ -1,13 +1,15 @@
-import { ModeToggle } from "./components/mode-toggle";
-import { Button } from "./components/ui/button";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ROUTES } from "./lib/constants";
 
 const App = () => {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hackathon</h1>
-      <Button>Vishal Kumawat</Button>
-      <ModeToggle />
-    </>
+    <BrowserRouter>
+      <Routes>
+        {ROUTES.map((route, index) => (
+          <Route key={index} path={route.path} element={<route.component />} />
+        ))}
+      </Routes>
+    </BrowserRouter>
   );
 };
 
