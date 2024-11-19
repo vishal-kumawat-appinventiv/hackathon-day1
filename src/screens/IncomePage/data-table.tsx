@@ -21,6 +21,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { clearIncome } from "@/redux/slices/budgetSlice";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -49,10 +52,24 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const dispatch: AppDispatch = useDispatch();
+
+  const handleDeleteAllIncomeData = () => {
+    dispatch(clearIncome());
+    const prevIncome = localStorage.getItem("budgets");
+    if (prevIncome) {
+      const prevIncomeArray = JSON.parse(prevIncome);
+      const filteredIncomeArray = prevIncomeArray.filter(
+        (budget: any) => budget.type !== "Income"
+      );
+      localStorage.setItem("budgets", JSON.stringify(filteredIncomeArray));
+    }
+  };
+
   return (
     <div>
-      <div className="flex gap-3">
-        <div className="flex items-center py-4">
+      <div className="flex flex-wrap gap-3 mb-4">
+        <div className="flex items-center">
           <Input
             placeholder="Filter by category..."
             value={
@@ -64,7 +81,7 @@ export function DataTable<TData, TValue>({
             className="max-w-sm"
           />
         </div>
-        <div className="flex items-center py-4">
+        <div className="flex items-center">
           <Input
             placeholder="Filter by note..."
             value={(table.getColumn("note")?.getFilterValue() as string) ?? ""}
@@ -73,6 +90,11 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-sm"
           />
+        </div>
+        <div className="flex items-center">
+          <Button variant="destructive" onClick={handleDeleteAllIncomeData}>
+            Delete All Income
+          </Button>
         </div>
       </div>
       <div className="rounded-md border">

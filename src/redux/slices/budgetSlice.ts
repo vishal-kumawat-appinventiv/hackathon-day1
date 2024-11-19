@@ -36,6 +36,9 @@ const budgetSlice = createSlice({
         state.data[index] = action.payload;
       }
     },
+    clearIncome: (state) => {
+      state.data = state.data.filter((budget) => budget.type !== "Income");
+    },
     clearBudget: (state) => {
       state.data = [];
     },
@@ -44,8 +47,13 @@ const budgetSlice = createSlice({
 
 export default budgetSlice.reducer;
 
-export const { addBudget, deleteBudget, updateBudget, clearBudget } =
-  budgetSlice.actions;
+export const {
+  addBudget,
+  deleteBudget,
+  updateBudget,
+  clearBudget,
+  clearIncome,
+} = budgetSlice.actions;
 
 export const getIncomeData = createSelector(
   (state: RootState) => state.budget.data,
