@@ -29,8 +29,6 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [note, setNote] = useState<string>("");
 
-  console.log(category, amount, date, note);
-
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
@@ -66,6 +64,7 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
           </Label>
           <Input
             id="amount"
+            placeholder="Enter amount"
             className="col-span-3"
             type="number"
             onChange={(e) => setAmount(Number(e.target.value))}
@@ -88,6 +87,7 @@ const DiaglogData: React.FC<Props> = ({ title }) => {
           </Label>
           <Input
             id="note"
+            placeholder="Enter note"
             className="col-span-3"
             onChange={(e) => setNote(e.target.value)}
           />
