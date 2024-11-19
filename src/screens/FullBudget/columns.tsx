@@ -12,6 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { deleteBudget } from "@/redux/slices/budgetSlice";
+import { useToast } from "@/hooks/use-toast";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import DiaglogData from "@/components/DiaglogData";
 
 export const columns: ColumnDef<Budget>[] = [
   {
@@ -87,7 +93,16 @@ export const columns: ColumnDef<Budget>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const budget = row.original;
+      const expenseRow = row.original;
+      const dispatch: AppDispatch = useDispatch();
+      const { toast } = useToast();
+
+      const handleDelete = (id: string) => {
+        dispatch(deleteBudget(id));
+        toast({
+          title: "Budget deleted successfully!",
+        });
+      };
 
       return (
         <DropdownMenu>
@@ -100,13 +115,22 @@ export const columns: ColumnDef<Budget>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(budget?.id)}
+              onClick={() => navigator.clipboard.writeText(expenseRow?.id)}
             >
-              Copy ID
+              Copy Expense ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="cursor-pointer hover:bg-gray-800 p-1 ml-1 rounded">
+                  Edit Expense
+                </div>
+              </DialogTrigger>
+              <DiaglogData title="Expense" edit={expenseRow} />
+            </Dialog>
+            <DropdownMenuItem onClick={() => handleDelete(expenseRow.id)}>
+              Delete Expense
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
