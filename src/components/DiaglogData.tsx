@@ -91,7 +91,7 @@ const DiaglogData: React.FC<Props> = ({ title, edit }) => {
           <Label htmlFor="category" className="text-right">
             Category
           </Label>
-          <Select onValueChange={(e) => setCategory(e)}>
+          <Select required onValueChange={(e) => setCategory(e)}>
             <SelectTrigger className="col-span-3">
               <SelectValue placeholder={"Select a category"} />
             </SelectTrigger>
@@ -114,6 +114,7 @@ const DiaglogData: React.FC<Props> = ({ title, edit }) => {
             Amount
           </Label>
           <Input
+            required
             id="amount"
             placeholder="Enter amount"
             className="col-span-3"
@@ -126,6 +127,7 @@ const DiaglogData: React.FC<Props> = ({ title, edit }) => {
             Date
           </Label>
           <Calendar
+            required
             mode="single"
             selected={date}
             onSelect={setDate as any}
@@ -137,6 +139,7 @@ const DiaglogData: React.FC<Props> = ({ title, edit }) => {
             Note
           </Label>
           <Input
+            required
             id="note"
             placeholder="Enter note"
             className="col-span-3"
