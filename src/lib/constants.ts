@@ -1,5 +1,6 @@
 import ExpensePage from "@/screens/ExpensePage";
 import HomePage from "@/screens/HomePage";
+import IncomePage from "@/screens/IncomePage";
 
 export const ROUTES = [
   {
@@ -9,6 +10,10 @@ export const ROUTES = [
   {
     path: "/expense",
     component: ExpensePage,
+  },
+  {
+    path: "/income",
+    component: IncomePage,
   },
 ];
 

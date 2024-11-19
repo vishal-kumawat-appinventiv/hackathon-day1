@@ -7,8 +7,11 @@ import {
 } from "@/components/ui/card";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { FilePenLine, SquarePlus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="max-w-3xl mx-auto mt-5 md:mt-16 p-4">
       {/* TopBar */}
@@ -75,7 +78,10 @@ const HomePage = () => {
       </div>
       {/* Manage Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-        <Card className="py-5 hover:cursor-pointer">
+        <Card
+          className="py-5 hover:cursor-pointer"
+          onClick={() => navigate("/income")}
+        >
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
               Manage Income <FilePenLine size={30} />
@@ -83,7 +89,10 @@ const HomePage = () => {
             <CardDescription>Manage the expense details.</CardDescription>
           </CardHeader>
         </Card>
-        <Card className="py-5 hover:cursor-pointer">
+        <Card
+          className="py-5 hover:cursor-pointer"
+          onClick={() => navigate("/expense")}
+        >
           <CardHeader>
             <CardTitle className="flex items-center justify-between w-full">
               Manage Expense <FilePenLine size={30} />
